@@ -2,6 +2,7 @@
 import sys
 import os
 import gzip
+from pprint import pprint
 
 # Check args
 if len(sys.argv) != 2:
@@ -27,31 +28,34 @@ def open_file(file):
 
 
 def parse_file(file):
-    result = {}
+    result = []
     key = None  # Init key variable to track lines with values
-
     while line := file.readline():
         # Decode line to str if opened gzip file
         if type(line) is bytes:
             line = line.decode('utf-8')
 
+        if line == '\n':
+            d = {}
+            result.append(d)
+            continue
         # Check if line doesn't include key
         if line.startswith(' '):
             value = line.strip()
-            result[key].append(value)
+            d[key] += value
         else:
-            line = line.split(' ')
+            line = line.strip().split(' ')
             # Check if line includes key
             if line[0].endswith(':'):
                 key, value = get_key_value(line)
-                if key in result.keys():
-                    result[key].append(value)
+                if key in d.keys():
+                    d[key] += value
                 else:
-                    result[key] = [value]
+                    d[key] = value
     return result
 
 
-def get_key_value(line):
+def get_key_value(line: str):
     key = line[0].replace(':', '')
     value = ' '.join(line[1:]).lstrip()
     return key, value
@@ -60,15 +64,9 @@ def get_key_value(line):
 def load_data(text_file):
     res = open_file(text_file)
 
-    # Decided to not use pprint to avoid printing square brackets
-    for key in res.keys():
-        print(f'{key}:', end='')
-        for i, el in enumerate(res[key][1:]):
-            if i == 0:
-                indent = f'\t'
-            else:
-                indent = f"{' ' * (len(key) + 1)}\t"
-            print(f"{indent}\t{el.rstrip()}")
+    for el in res:
+        pprint(el)
+        print('\n')
 
 
 if __name__ == '__main__':
