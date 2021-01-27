@@ -1,5 +1,5 @@
 #
-# The contents of this file are subject to 
+# The contents of this file are subject to
 # AFRINIC Database Terms and Conditions
 #
 # http://www.afrinic.net/en/services
@@ -300,4 +300,3 @@ changed:        ***@ripe.net 20040421
 changed:        ***@ripe.net 20050202
 changed:        ***@afrinic.net 20050205
 source:         AFRINIC
-
