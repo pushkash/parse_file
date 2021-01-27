@@ -28,7 +28,7 @@ def open_file(file):
 
 
 def parse_file(file):
-    result = []
+    documents = []
     key = None  # Init key variable to track lines with values
     while line := file.readline():
         # Decode line to str if opened gzip file
@@ -38,7 +38,7 @@ def parse_file(file):
         # Create new document
         if line == '\n':
             document = {}
-            result.append(document)
+            documents.append(document)
             continue
 
         # Check if line doesn't include key
@@ -54,7 +54,7 @@ def parse_file(file):
                     document[key] = '\n'.join([document[key], value])
                 else:
                     document[key] = value
-    return result
+    return documents
 
 
 def get_key_value(line: str):
