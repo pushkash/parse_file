@@ -35,23 +35,25 @@ def parse_file(file):
         if type(line) is bytes:
             line = line.decode('utf-8')
 
+        # Create new document
         if line == '\n':
-            d = {}
-            result.append(d)
+            document = {}
+            result.append(document)
             continue
+
         # Check if line doesn't include key
         if line.startswith(' '):
             value = line.strip()
-            d[key] += value
+            document[key] = ''.join([document[key], value])
         else:
             line = line.strip().split(' ')
             # Check if line includes key
             if line[0].endswith(':'):
                 key, value = get_key_value(line)
-                if key in d.keys():
-                    d[key] += value
+                if key in document.keys():
+                    document[key] = '\n'.join([document[key], value])
                 else:
-                    d[key] = value
+                    document[key] = value
     return result
 
 
