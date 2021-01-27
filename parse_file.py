@@ -59,7 +59,7 @@ def parse_file(file):
 
 def get_key_value(line: str):
     key = line[0].replace(':', '')
-    value = ' '.join(line[1:]).lstrip()
+    value = ' '.join(line[1:]).strip()
     return key, value
 
 
