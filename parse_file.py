@@ -35,8 +35,8 @@ def parse_file(file):
         if type(line) is bytes:
             line = line.decode('utf-8')
 
-        # Check if line doesn't include key or not empty
-        if line.startswith(' ') and line:
+        # Check if line doesn't include key
+        if line.startswith(' '):
             value = line.strip()
             result[key].append(value)
         else:
