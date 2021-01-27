@@ -64,10 +64,10 @@ def get_key_value(line: str):
 
 
 def load_data(text_file):
-    res = open_file(text_file)
+    documents = open_file(text_file)
 
-    for el in res:
-        pprint(el)
+    for document in documents:
+        pprint(document)
         print('\n')
 
 
