@@ -58,10 +58,9 @@ def get_key_value(line):
 
 
 def load_data(text_file):
-    # Decided to not use pprint to avoid printing square brackets
-
     res = open_file(text_file)
 
+    # Decided to not use pprint to avoid printing square brackets
     for key in res.keys():
         print(f'{key}:', end='')
         for i, el in enumerate(res[key][1:]):
